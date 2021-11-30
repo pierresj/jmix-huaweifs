@@ -30,7 +30,7 @@ class HuaweiFileStorageTest extends Specification {
         def fileRef=fileStorage.saveStream(fileName,fileStream);
         def openedStream=fileStorage.openStream(fileRef);
         expect:
-            openedStream==null
+            openedStream!=null
     }
 
     def "openStream"(){
@@ -45,8 +45,8 @@ class HuaweiFileStorageTest extends Specification {
 
     def "fileExists"() {
         def storageName = fileStorage.getStorageName()
-        def fileKey = "2021/11/13/ff5398c4-2571-fc67-64c3-f874073067dc.txt"
-        def fileName="ff5398c4-2571-fc67-64c3-f874073067dc.txt"
+        def fileKey = "2021/11/30/679f1b22-d6be-d1f4-a861-417d73c722b8.txt"
+        def fileName="679f1b22-d6be-d1f4-a861-417d73c722b8.txt"
 
         def fileref = new FileRef(storageName, fileKey, fileName)
         def exists = fileStorage.fileExists(fileref)
@@ -58,8 +58,8 @@ class HuaweiFileStorageTest extends Specification {
 
     def "removeFile"(){
         def storageName = fileStorage.getStorageName()
-        def fileKey = "2021/11/12/583fa259-848e-0ad3-8888-7d6be6e6f203.txt"
-        def fileName="583fa259-848e-0ad3-8888-7d6be6e6f203.txt"
+        def fileKey = "2021/11/30/679f1b22-d6be-d1f4-a861-417d73c722b8.txt"
+        def fileName="679f1b22-d6be-d1f4-a861-417d73c722b8.txt"
 
         def fileref = new FileRef(storageName, fileKey, fileName);
         fileStorage.removeFile(fileref)
@@ -69,7 +69,7 @@ class HuaweiFileStorageTest extends Specification {
         expect:  !exists
     }
 
-    def "ali storage initialized"() {
+    def "huawei storage initialized"() {
         expect:
         fileStorage.getStorageName() == HuaweiFileStorage.DEFAULT_STORAGE_NAME
     }

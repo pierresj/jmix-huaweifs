@@ -216,17 +216,30 @@ public class HuaweiFileStorage implements FileStorage {
 
     @Override
     public InputStream openStream(FileRef reference) {
-        return null;
+        try{
+            ObsClient client = clientReference.get();
+            ObsObject object = client.getObject(bucket, reference.getPath());
+            return object.getObjectContent();
+        } catch (Exception e) {
+            String message = String.format("Could not load file %s.", reference.getFileName());
+            throw new FileStorageException(FileStorageException.Type.IO_EXCEPTION, message);
+        }
     }
 
     @Override
     public void removeFile(FileRef reference) {
-
+        ObsClient client = clientReference.get();
+        client.deleteObject(bucket, reference.getPath());
     }
 
     @Override
     public boolean fileExists(FileRef reference) {
-        return true;
+        ObsClient client = clientReference.get();
+        ListObjectsRequest request = new ListObjectsRequest(bucket);//根据前缀获取对象
+        request.setMaxKeys(1);
+        request.setPrefix(reference.getPath());
+        ObjectListing result = client.listObjects(request);
+        return result.getObjects().size() > 0;
     }
 
     public void setAccessKey(String accessKey) {
