@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class HuaweiFileStorageTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class HuaweiFileStorageTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/default-package.html">default-package</a> &gt; HuaweiFileStorageTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">3.303s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+<li>
+<a href="#tab2">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">save stream</td>
+<td class="success">3.303s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.5.5)
+
+2021-11-30 15:57:28.614  INFO 19378 --- [    Test worker] HuaweiFileStorageTest                    : Starting HuaweiFileStorageTest using Java 1.8.0_251 on taoxianshengdeMacBook-Air.local with PID 19378 (started by taoxiansheng in /Users/taoxiansheng/IdeaProjects/huawei-obs-storage/huaweifs)
+2021-11-30 15:57:28.631  INFO 19378 --- [    Test worker] HuaweiFileStorageTest                    : No active profile set, falling back to default profiles: default
+2021-11-30 15:57:35.454  INFO 19378 --- [    Test worker] HuaweiFileStorageTest                    : Started HuaweiFileStorageTest in 7.629 seconds (JVM running for 13.553)
+2021-11-30 15:57:36.447  INFO 19378 --- [    Test worker] c.o.s.AbstractClient                     : Storage|1|HTTP+XML|ObsClient||||2021-11-30 15:57:35|2021-11-30 15:57:36|||0|
+2021-11-30 15:57:36.451  WARN 19378 --- [    Test worker] c.o.s.AbstractClient                     : [OBS SDK Version=3.21.8];[Endpoint=https://obs.cn-north-1.myhuaweicloud.com:443/];[Access Mode=Virtul Hosting]
+2021-11-30 15:57:38.657  INFO 19378 --- [    Test worker] c.o.s.i.RestStorageService               : OkHttp cost 1652 ms to apply http request
+2021-11-30 15:57:38.684  INFO 19378 --- [    Test worker] c.o.s.i.RestStorageService               : Storage|1|HTTP+XML|performRequest||||2021-11-30 15:57:36|2021-11-30 15:57:38||[responseCode: 200][request-id: 0000017D6FD967CE85D0820D1965E110]|0|
+2021-11-30 15:57:38.892  INFO 19378 --- [    Test worker] c.o.s.i.RestStorageService               : OkHttp cost 176 ms to apply http request
+2021-11-30 15:57:38.893  INFO 19378 --- [    Test worker] c.o.s.i.RestStorageService               : Storage|1|HTTP+XML|performRequest||||2021-11-30 15:57:38|2021-11-30 15:57:38||[responseCode: 200][request-id: 0000017D6FD968AB85D08DEFEAB42741]|0|
+2021-11-30 15:57:38.933  INFO 19378 --- [    Test worker] c.o.s.AbstractClient                     : Storage|1|HTTP+XML|initiateMultipartUpload||||2021-11-30 15:57:36|2021-11-30 15:57:38|||0|
+2021-11-30 15:57:38.934  INFO 19378 --- [    Test worker] c.o.s.AbstractClient                     : ObsClient [initiateMultipartUpload] cost 1988 ms
+2021-11-30 15:57:38.936  INFO 19378 --- [    Test worker] c.o.l.AccessLogger                       : 2021-11-30 15:57:36 449|com.obs.services.AbstractClient|init|79|Storage|1|HTTP+XML|ObsClient||||2021-11-30 15:57:35|2021-11-30 15:57:36|||0|
+2021-11-30 15:57:36 451|com.obs.services.AbstractClient|init|98|[OBS SDK Version=3.21.8];[Endpoint=https://obs.cn-north-1.myhuaweicloud.com:443/];[Access Mode=Virtul Hosting]
+2021-11-30 15:57:38 658|com.obs.services.internal.RestStorageService|executeRequest|560|OkHttp cost 1652 ms to apply http request
+2021-11-30 15:57:38 685|com.obs.services.internal.RestStorageService|performRequest|387|Storage|1|HTTP+XML|performRequest||||2021-11-30 15:57:36|2021-11-30 15:57:38||[responseCode: 200][request-id: 0000017D6FD967CE85D0820D1965E110]|0|
+2021-11-30 15:57:38 893|com.obs.services.internal.RestStorageService|executeRequest|560|OkHttp cost 176 ms to apply http request
+2021-11-30 15:57:38 894|com.obs.services.internal.RestStorageService|performRequest|387|Storage|1|HTTP+XML|performRequest||||2021-11-30 15:57:38|2021-11-30 15:57:38||[responseCode: 200][request-id: 0000017D6FD968AB85D08DEFEAB42741]|0|
+2021-11-30 15:57:38 933|com.obs.services.AbstractClient|doActionWithResult|390|Storage|1|HTTP+XML|initiateMultipartUpload||||2021-11-30 15:57:36|2021-11-30 15:57:38|||0|
+2021-11-30 15:57:38 935|com.obs.services.AbstractClient|doActionWithResult|391|ObsClient [initiateMultipartUpload] cost 1988 ms
+
+2021-11-30 15:57:38.974  INFO 19378 --- [pool-2-thread-1] c.o.s.i.RestStorageService               : write data end, cost 1 ms
+2021-11-30 15:57:39.082  INFO 19378 --- [pool-2-thread-1] c.o.s.i.RestStorageService               : OkHttp cost 112 ms to apply http request
+2021-11-30 15:57:39.082  INFO 19378 --- [pool-2-thread-1] c.o.s.i.RestStorageService               : Storage|1|HTTP+XML|performRequest||||2021-11-30 15:57:38|2021-11-30 15:57:39||[responseCode: 200][request-id: 0000017D6FD969B685D0972D76371936]|0|
+2021-11-30 15:57:39.086  INFO 19378 --- [pool-2-thread-1] c.o.s.AbstractClient                     : Storage|1|HTTP+XML|uploadPart||||2021-11-30 15:57:38|2021-11-30 15:57:39|||0|
+2021-11-30 15:57:39.089  INFO 19378 --- [pool-2-thread-1] c.o.s.AbstractClient                     : ObsClient [uploadPart] cost 139 ms
+2021-11-30 15:57:39.090  INFO 19378 --- [pool-2-thread-1] c.o.l.AccessLogger                       : 2021-11-30 15:57:38 975|com.obs.services.internal.RepeatableRequestEntity|writeTo|108|write data end, cost 1 ms
+2021-11-30 15:57:39 082|com.obs.services.internal.RestStorageService|executeRequest|560|OkHttp cost 112 ms to apply http request
+2021-11-30 15:57:39 084|com.obs.services.internal.RestStorageService|performRequest|387|Storage|1|HTTP+XML|performRequest||||2021-11-30 15:57:38|2021-11-30 15:57:39||[responseCode: 200][request-id: 0000017D6FD969B685D0972D76371936]|0|
+2021-11-30 15:57:39 087|com.obs.services.AbstractClient|doActionWithResult|390|Storage|1|HTTP+XML|uploadPart||||2021-11-30 15:57:38|2021-11-30 15:57:39|||0|
+2021-11-30 15:57:39 089|com.obs.services.AbstractClient|doActionWithResult|391|ObsClient [uploadPart] cost 139 ms
+
+2021-11-30 15:57:39.223  INFO 19378 --- [    Test worker] c.o.s.i.RestStorageService               : OkHttp cost 122 ms to apply http request
+2021-11-30 15:57:39.227  INFO 19378 --- [    Test worker] c.o.s.i.RestStorageService               : Storage|1|HTTP+XML|performRequest||||2021-11-30 15:57:39|2021-11-30 15:57:39||[responseCode: 200][request-id: 0000017D6FD96A7C85D0A0AE64B7C804]|0|
+2021-11-30 15:57:39.273  INFO 19378 --- [    Test worker] c.o.s.AbstractClient                     : Storage|1|HTTP+XML|listParts||||2021-11-30 15:57:39|2021-11-30 15:57:39|||0|
+2021-11-30 15:57:39.275  INFO 19378 --- [    Test worker] c.o.s.AbstractClient                     : ObsClient [listParts] cost 177 ms
+2021-11-30 15:57:39.282  INFO 19378 --- [    Test worker] c.o.l.AccessLogger                       : 2021-11-30 15:57:39 224|com.obs.services.internal.RestStorageService|executeRequest|560|OkHttp cost 122 ms to apply http request
+2021-11-30 15:57:39 228|com.obs.services.internal.RestStorageService|performRequest|387|Storage|1|HTTP+XML|performRequest||||2021-11-30 15:57:39|2021-11-30 15:57:39||[responseCode: 200][request-id: 0000017D6FD96A7C85D0A0AE64B7C804]|0|
+2021-11-30 15:57:39 275|com.obs.services.AbstractClient|doActionWithResult|390|Storage|1|HTTP+XML|listParts||||2021-11-30 15:57:39|2021-11-30 15:57:39|||0|
+2021-11-30 15:57:39 276|com.obs.services.AbstractClient|doActionWithResult|391|ObsClient [listParts] cost 177 ms
+
+2021-11-30 15:57:39.738  INFO 19378 --- [    Test worker] c.o.s.i.RestStorageService               : OkHttp cost 194 ms to apply http request
+2021-11-30 15:57:39.740  INFO 19378 --- [    Test worker] c.o.s.i.RestStorageService               : Storage|1|HTTP+XML|performRequest||||2021-11-30 15:57:39|2021-11-30 15:57:39||[responseCode: 200][request-id: 0000017D6FD96C7785D0B07C2195763B]|0|
+2021-11-30 15:57:39.755  INFO 19378 --- [    Test worker] c.o.s.AbstractClient                     : Storage|1|HTTP+XML|completeMultipartUpload||||2021-11-30 15:57:39|2021-11-30 15:57:39|||0|
+2021-11-30 15:57:39.758  INFO 19378 --- [    Test worker] c.o.s.AbstractClient                     : ObsClient [completeMultipartUpload] cost 469 ms
+2021-11-30 15:57:39.760  INFO 19378 --- [    Test worker] c.o.l.AccessLogger                       : 2021-11-30 15:57:39 739|com.obs.services.internal.RestStorageService|executeRequest|560|OkHttp cost 194 ms to apply http request
+2021-11-30 15:57:39 742|com.obs.services.internal.RestStorageService|performRequest|387|Storage|1|HTTP+XML|performRequest||||2021-11-30 15:57:39|2021-11-30 15:57:39||[responseCode: 200][request-id: 0000017D6FD96C7785D0B07C2195763B]|0|
+2021-11-30 15:57:39 756|com.obs.services.AbstractClient|doActionWithResult|390|Storage|1|HTTP+XML|completeMultipartUpload||||2021-11-30 15:57:39|2021-11-30 15:57:39|||0|
+2021-11-30 15:57:39 758|com.obs.services.AbstractClient|doActionWithResult|391|ObsClient [completeMultipartUpload] cost 469 ms
+
+</pre>
+</span>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>[Test worker] INFO io.jmix.core.JmixModulesProcessor - Using Jmix modules: [io.jmix.core, io.github.pierresj.huaweifs, test_support]
+[Test worker] INFO io.jmix.core.impl.scanning.JmixModulesClasspathScanner - Classpath scan completed in 77 ms
+[Test worker] INFO io.jmix.core.impl.MetadataLoader - Metadata initialized in 113 ms
+[Test worker] WARN io.jmix.core.metamodel.datatype.impl.FormatStringsLoader - Localized format strings are not defined for en
+[Test worker] INFO io.github.pierresj.huaweifs.HuaweiFileStorage - Succeed to complete multiparts into an object named 2021/11/30/679f1b22-d6be-d1f4-a861-417d73c722b8.txt
+
+[Test worker] INFO io.github.pierresj.huaweifs.HuaweiFileStorage - Completing to upload multiparts
+
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.2</a> at 2021-11-30 15:57:40</p>
+</div>
+</div>
+</body>
+</html>

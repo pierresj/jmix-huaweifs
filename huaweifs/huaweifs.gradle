@@ -1,0 +1,26 @@
+
+apply plugin: 'groovy'
+apply plugin: 'io.jmix'
+
+group = 'io.gethub.pierresj.huaweifs'
+archivesBaseName = 'jmixcn-huaweifs'
+
+dependencies {
+    api 'io.jmix.core:jmix-core'
+    api 'com.huaweicloud:esdk-obs-java-bundle:3.21.8'
+
+    implementation 'com.google.code.gson:gson:2.8.8'
+    testImplementation 'org.springframework.boot:spring-boot-test'
+    testImplementation 'org.springframework:spring-test'
+    testImplementation "org.spockframework:spock-core"
+    testImplementation "org.spockframework:spock-spring"
+    testRuntimeOnly 'org.slf4j:slf4j-simple'
+    testRuntimeOnly 'org.hsqldb:hsqldb'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
+
+}
+
+test {
+    useJUnitPlatform()
+}

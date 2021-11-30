@@ -1,0 +1,118 @@
+buildscript {
+    ext.aliRepo = [
+            //snapshot: 'https://repo.rdc.aliyun.com/repository/72077-snapshot-057BdJ/',
+            //release : 'https://repo.rdc.aliyun.com/repository/72077-release-FWXfLw/',
+            snapshot: 'https://repo-snapshot.sikada.cn/',
+            release : 'https://repo.sikada.cn/',
+            username: project.hasProperty("skd.repo.username") ? project['skd.repo.username'] : '',
+            password: project.hasProperty("skd.repo.password") ? project['skd.repo.password'] : ''
+    ]
+
+    repositories {
+        gradlePluginPortal()
+        maven {
+            url 'https://maven.aliyun.com/nexus/content/groups/public/'
+        }
+
+        maven {
+            url aliRepo.release
+            credentials {
+                username(aliRepo.username)
+                password(aliRepo.password)
+            }
+        }
+        maven {
+            url aliRepo.snapshot
+            credentials {
+                username(aliRepo.username)
+                password(aliRepo.password)
+            }
+        }
+
+    }
+    dependencies {
+        classpath "io.jmix.gradle:jmix-gradle-plugin:1.1.0"
+    }
+}
+group = 'io.github.pierresj'
+version = '0.0.1-SNAPSHOT'
+if(project.hasProperty('teamcity')) {
+    version += '-build-' + project.teamcity['build.number']
+} else {
+    version += '-localbuild'
+}
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'io.jmix'
+    apply plugin: 'signing'
+
+    repositories {
+        mavenCentral()
+                maven {
+        url 'https://global.repo.jmix.io/repository/public'
+    }
+    }
+
+    jmix {
+        bomVersion = '1.1.0'
+        projectId = 'huaweifs'
+    }
+
+    group = this.group
+    version = this.version
+
+    def props = new Properties()
+    buildFile.withInputStream { props.load(it) }
+    def subArchivesBaseName = props.getProperty('archivesBaseName')
+    def archName = subArchivesBaseName.substring(1, subArchivesBaseName.length() - 1)
+
+    java {
+        withSourcesJar()
+    }
+
+    artifacts {
+        archives sourcesJar
+    }
+
+    publishing {
+        repositories {
+            maven {
+                url = aliRepo.snapshot
+                //url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                credentials {
+                    username aliRepo.username
+                    password aliRepo.password
+                }
+                allowInsecureProtocol = true
+            }
+            maven {
+                url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                credentials {
+                    username "sikada"
+                    password "G%w!M4RHEuZ5Xd2"
+                }
+                allowInsecureProtocol = true
+            }
+            maven {
+                url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                credentials {
+                    username "sikada"
+                    password "G%w!M4RHEuZ5Xd2"
+                }
+                allowInsecureProtocol = true
+            }
+        }
+        publications {
+            javaMaven(MavenPublication) {
+                artifactId = archName
+                from components.java
+            }
+        }
+    }
+
+    // remove after https://youtrack.jetbrains.com/issue/IDEA-227215 is fixed
+    tasks.withType(GenerateModuleMetadata) {
+        enabled = false
+    }
+}
