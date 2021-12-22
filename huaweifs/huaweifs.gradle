@@ -3,7 +3,7 @@ apply plugin: 'groovy'
 apply plugin: 'io.jmix'
 
 group = 'io.gethub.pierresj.huaweifs'
-archivesBaseName = 'jmixcn-huaweifs'
+archivesBaseName = 'jmix-huaweifs'
 
 dependencies {
     api 'io.jmix.core:jmix-core'

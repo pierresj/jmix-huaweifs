@@ -13,12 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.Nullable;
 import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -65,8 +61,7 @@ public class HuaweiFileStorage implements FileStorage {
                             String secretAccessKey,
                             String bucket,
                             int chunkSize,
-                            @Nullable String endpointUrl,
-                            String regionName) {
+                            @Nullable String endpointUrl) {
         this.useConfigurationProperties = false;
         this.storageName = storageName;
         this.accessKey = accessKey;
@@ -76,7 +71,7 @@ public class HuaweiFileStorage implements FileStorage {
         this.endpointUrl = endpointUrl;
     }
 
-    @EventListener
+    @EventListener //事件监听
     public void initOssClient(ApplicationStartedEvent event) {
         refreshObsClient();
     }
@@ -106,6 +101,10 @@ public class HuaweiFileStorage implements FileStorage {
         return createDateDir() + "/" + createUuidFilename(fileName);
     }
 
+    /**
+     * 生成年月日的文件夹路径
+     * @return
+     */
     protected String createDateDir() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(timeSource.currentTimestamp());
@@ -118,7 +117,13 @@ public class HuaweiFileStorage implements FileStorage {
                 StringUtils.leftPad(String.valueOf(day), 2, '0'));
     }
 
+    /**
+     * 生成uuid的文件名
+     * @param fileName 原文件名
+     * @return
+     */
     protected String createUuidFilename(String fileName) {
+        //获取扩展名
         String extension = FilenameUtils.getExtension(fileName);
         if (StringUtils.isNotEmpty(extension)) {
             return UuidProvider.createUuid().toString() + "." + extension;
@@ -126,6 +131,13 @@ public class HuaweiFileStorage implements FileStorage {
             return UuidProvider.createUuid().toString();
         }
     }
+
+    /**
+     * 合并段
+     * @param partEtags
+     * @param objectName
+     * @param uploadId
+     */
     private void completeMultipartUpload(List<PartEtag> partEtags, String objectName, String uploadId) {
         // Make part numbers in ascending order
         Collections.sort(partEtags, new Comparator<PartEtag>() {
@@ -140,6 +152,11 @@ public class HuaweiFileStorage implements FileStorage {
         clientReference.get().completeMultipartUpload(completeMultipartUploadRequest);
     }
 
+    /**
+     * 列举已上传的段
+     * @param objectName 文件名称
+     * @param uploadId
+     */
     private void listAllParts(String objectName, String uploadId) {
         log.debug("Listing all parts......");
         ListPartsRequest listPartsRequest = new ListPartsRequest(bucket, objectName, uploadId);
@@ -157,19 +174,15 @@ public class HuaweiFileStorage implements FileStorage {
         try {
             byte[] data = IOUtils.toByteArray(inputStream);
             ObsClient client = clientReference.get();
-
             // 初始化线程池
             ExecutorService executorService = Executors.newFixedThreadPool(20);
-
             // 初始化分段上传任务
             InitiateMultipartUploadRequest request = new InitiateMultipartUploadRequest(bucket, fileKey);
             InitiateMultipartUploadResult result = client.initiateMultipartUpload(request);
 
             List<PartEtag> partEtags = new ArrayList<>();
-
             String uploadId = result.getUploadId();
 
-            // 每段上传100MB
             int chunkSizeBytes = this.chunkSize * 1024;
             int partCount = 0;
             for (int i = 0; i * chunkSizeBytes < data.length; i++) {
@@ -179,10 +192,10 @@ public class HuaweiFileStorage implements FileStorage {
                 byte[] chunkBytes = getChunkBytes(data, i * chunkSizeBytes, endChunkPosition);
                 // 分段在文件中的起始位置
                 long offset = i * chunkSizeBytes;
-
                 PartUploader partUploader = new PartUploader(client, partEtags, chunkBytes, fileKey, bucket, chunkBytes.length, partNumber, uploadId, offset);
                 executorService.execute(partUploader);
             }
+            //等待上传完成
             executorService.shutdown();
             while (!executorService.isTerminated()) {
                 try {
@@ -199,7 +212,9 @@ public class HuaweiFileStorage implements FileStorage {
                 log.info("Succeed to complete multiparts into an object named " + fileKey + "\n");
             }
 
+            //列举已上传的段
             listAllParts(fileKey, uploadId);
+            //合并段
             completeMultipartUpload(partEtags, fileKey, uploadId);
             return new FileRef(getStorageName(), fileKey, fileName);
         } catch (IOException e) {

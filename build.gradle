@@ -35,11 +35,10 @@ buildscript {
     }
 }
 group = 'io.github.pierresj'
-version = '0.0.1-SNAPSHOT'
+//version = '0.0.2-SNAPSHOT'
+version = '0.0.1-RELEASE'
 if(project.hasProperty('teamcity')) {
     version += '-build-' + project.teamcity['build.number']
-} else {
-    version += '-localbuild'
 }
 subprojects {
     apply plugin: 'java-library'
@@ -47,11 +46,15 @@ subprojects {
     apply plugin: 'io.jmix'
     apply plugin: 'signing'
 
+    signing {
+        sign configurations.archives
+    }
+
     repositories {
         mavenCentral()
-                maven {
-        url 'https://global.repo.jmix.io/repository/public'
-    }
+        maven {
+            url 'https://global.repo.jmix.io/repository/public'
+        }
     }
 
     jmix {
@@ -67,40 +70,39 @@ subprojects {
     def subArchivesBaseName = props.getProperty('archivesBaseName')
     def archName = subArchivesBaseName.substring(1, subArchivesBaseName.length() - 1)
 
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
+    }
+
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
     java {
         withSourcesJar()
     }
 
     artifacts {
-        archives sourcesJar
+        archives javadocJar, sourcesJar
+    }
+
+    ext {
+        isReleaseVersion = !version.endsWith("SNAPSHOT")
+        //isReleaseVersion = !version.endsWith("RELEASE")
     }
 
     publishing {
         repositories {
             maven {
-                url = aliRepo.snapshot
-                //url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                def releaseRepo = "https://s01.oss.sonatype.org/content/repositories/releases/"
+                def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                url = isReleaseVersion ? releaseRepo : snapshotRepo
                 credentials {
-                    username aliRepo.username
-                    password aliRepo.password
+                    username = "sikada"
+                    password = "G%w!M4RHEuZ5Xd2"
                 }
-                allowInsecureProtocol = true
-            }
-            maven {
-                url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                credentials {
-                    username "sikada"
-                    password "G%w!M4RHEuZ5Xd2"
-                }
-                allowInsecureProtocol = true
-            }
-            maven {
-                url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-                credentials {
-                    username "sikada"
-                    password "G%w!M4RHEuZ5Xd2"
-                }
-                allowInsecureProtocol = true
             }
         }
         publications {
@@ -111,8 +113,15 @@ subprojects {
         }
     }
 
+    signing {
+        sign publishing.publications.javaMaven
+    }
+
     // remove after https://youtrack.jetbrains.com/issue/IDEA-227215 is fixed
     tasks.withType(GenerateModuleMetadata) {
         enabled = false
     }
+
 }
+
+

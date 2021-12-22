@@ -12,10 +12,10 @@ import java.util.List;
 
 class PartUploader implements Runnable {
 
-    private final String bucketName;
-    private final String objectName;
     private final ObsClient client;
     private final List<PartEtag> partEtags;
+    private final String bucketName;
+    private final String objectName; //文件名
     private final byte[] data;
     private final long partSize;
     private final int partNumber;
