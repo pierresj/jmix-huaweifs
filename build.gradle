@@ -35,8 +35,8 @@ buildscript {
     }
 }
 group = 'io.github.pierresj'
-//version = '0.0.2-SNAPSHOT'
-version = '0.0.1-RELEASE'
+version = '0.0.1-SNAPSHOT'
+//version = '0.0.1-RELEASE'
 if(project.hasProperty('teamcity')) {
     version += '-build-' + project.teamcity['build.number']
 }
@@ -100,8 +100,8 @@ subprojects {
                 def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                 url = isReleaseVersion ? releaseRepo : snapshotRepo
                 credentials {
-                    username = "sikada"
-                    password = "G%w!M4RHEuZ5Xd2"
+                    username = sonatypeUsername
+                    password = sonatypePassword
                 }
             }
         }

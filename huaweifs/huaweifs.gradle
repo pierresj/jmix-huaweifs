@@ -2,7 +2,7 @@
 apply plugin: 'groovy'
 apply plugin: 'io.jmix'
 
-group = 'io.gethub.pierresj.huaweifs'
+group = 'io.github.pierresj'
 archivesBaseName = 'jmix-huaweifs'
 
 dependencies {
