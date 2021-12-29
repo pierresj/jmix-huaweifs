@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class HuaweiFileStorage implements FileStorage {
 
     private static final Logger log = LoggerFactory.getLogger(HuaweiFileStorage.class);
-    public static final String DEFAULT_STORAGE_NAME = "HuaweiObs";
+    public static final String DEFAULT_STORAGE_NAME = "huawei_fs";
 
     protected String storageName;
 
