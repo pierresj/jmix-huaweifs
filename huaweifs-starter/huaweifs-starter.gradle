@@ -1,4 +1,4 @@
-archivesBaseName = 'jmix-huaweifs'
+archivesBaseName = 'jmix-huaweifs-starter'
 
 jmix {
     entitiesEnhancing {
