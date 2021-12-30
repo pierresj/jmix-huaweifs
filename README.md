@@ -1,12 +1,8 @@
 # Jmix Huawei OBS File Storage
 
----
 用于华为云对象存储
 
----
 ## 安装
-
----
 
 | Jmix Version | Add-on Version | Implementation |
 |:-|:-|:-|
