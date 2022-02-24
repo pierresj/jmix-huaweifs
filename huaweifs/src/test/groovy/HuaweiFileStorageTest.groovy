@@ -57,8 +57,8 @@ class HuaweiFileStorageTest extends Specification {
 
     def "removeFile"(){
         def storageName = fileStorage.getStorageName()
-        def fileKey = "2022/02/24/13fa7aaf-284e-b2d0-7b2a-571a4b14eca3.txt"
-        def fileName="13fa7aaf-284e-b2d0-7b2a-571a4b14eca3.txt"
+        def fileKey = "2022/02/24/2480b1c7-c5fc-c212-3ec4-03d2d6351b90.txt "
+        def fileName="2480b1c7-c5fc-c212-3ec4-03d2d6351b90.txt "
 
         def fileref = new FileRef(storageName, fileKey, fileName);
         fileStorage.removeFile(fileref)
@@ -68,8 +68,4 @@ class HuaweiFileStorageTest extends Specification {
         expect:  !exists
     }
 
-    def "huawei storage initialized"() {
-        expect:
-        fileStorage.getStorageName() == HuaweiFileStorage.DEFAULT_STORAGE_NAME
-    }
 }
