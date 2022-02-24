@@ -43,11 +43,6 @@ subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
     apply plugin: 'io.jmix'
-    apply plugin: 'signing'
-
-    signing {
-        sign configurations.archives
-    }
 
     repositories {
         mavenCentral()
@@ -109,10 +104,6 @@ subprojects {
                 from components.java
             }
         }
-    }
-
-    signing {
-        sign publishing.publications.javaMaven
     }
 
     // remove after https://youtrack.jetbrains.com/issue/IDEA-227215 is fixed
