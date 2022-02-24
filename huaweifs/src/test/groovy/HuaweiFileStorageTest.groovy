@@ -33,8 +33,8 @@ class HuaweiFileStorageTest extends Specification {
     }
 
     def "openStream"(){
-        def fileKey = "2021/11/13/ff5398c4-2571-fc67-64c3-f874073067dc.txt"
-        def fileName="ff5398c4-2571-fc67-64c3-f874073067dc.txt"
+        def fileKey = "2022/02/24/449321b3-7dd5-c05c-1d97-d4780528f624.txt"
+        def fileName="449321b3-7dd5-c05c-1d97-d4780528f624.txt"
         def storageName = fileStorage.getStorageName()
         def fileRef = new FileRef(storageName, fileKey, fileName)
         fileStorage.openStream(fileRef)
@@ -44,8 +44,8 @@ class HuaweiFileStorageTest extends Specification {
 
     def "fileExists"() {
         def storageName = fileStorage.getStorageName()
-        def fileKey = "2021/11/30/679f1b22-d6be-d1f4-a861-417d73c722b8.txt"
-        def fileName="679f1b22-d6be-d1f4-a861-417d73c722b8.txt"
+        def fileKey = "2022/02/24/449321b3-7dd5-c05c-1d97-d4780528f624.txt"
+        def fileName="449321b3-7dd5-c05c-1d97-d4780528f624.txt"
 
         def fileref = new FileRef(storageName, fileKey, fileName)
         def exists = fileStorage.fileExists(fileref)
@@ -57,8 +57,8 @@ class HuaweiFileStorageTest extends Specification {
 
     def "removeFile"(){
         def storageName = fileStorage.getStorageName()
-        def fileKey = "2021/11/30/679f1b22-d6be-d1f4-a861-417d73c722b8.txt"
-        def fileName="679f1b22-d6be-d1f4-a861-417d73c722b8.txt"
+        def fileKey = "2022/02/24/13fa7aaf-284e-b2d0-7b2a-571a4b14eca3.txt"
+        def fileName="13fa7aaf-284e-b2d0-7b2a-571a4b14eca3.txt"
 
         def fileref = new FileRef(storageName, fileKey, fileName);
         fileStorage.removeFile(fileref)
