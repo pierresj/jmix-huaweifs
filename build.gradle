@@ -1,34 +1,9 @@
 buildscript {
-    ext.aliRepo = [
-            //snapshot: 'https://repo.rdc.aliyun.com/repository/72077-snapshot-057BdJ/',
-            //release : 'https://repo.rdc.aliyun.com/repository/72077-release-FWXfLw/',
-            snapshot: 'https://repo-snapshot.sikada.cn/',
-            release : 'https://repo.sikada.cn/',
-            username: project.hasProperty("skd.repo.username") ? project['skd.repo.username'] : '',
-            password: project.hasProperty("skd.repo.password") ? project['skd.repo.password'] : ''
-    ]
-
     repositories {
         gradlePluginPortal()
         maven {
             url 'https://maven.aliyun.com/nexus/content/groups/public/'
         }
-
-        maven {
-            url aliRepo.release
-            credentials {
-                username(aliRepo.username)
-                password(aliRepo.password)
-            }
-        }
-        maven {
-            url aliRepo.snapshot
-            credentials {
-                username(aliRepo.username)
-                password(aliRepo.password)
-            }
-        }
-
     }
     dependencies {
         classpath "io.jmix.gradle:jmix-gradle-plugin:1.1.0"
@@ -36,16 +11,15 @@ buildscript {
 }
 group = 'io.github.pierresj'
 
-if(project.hasProperty('teamcity')) {
-    version += '-build-' + project.teamcity['build.number']
-}
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
     apply plugin: 'io.jmix'
 
     repositories {
-        mavenCentral()
+        maven {
+            url 'https://maven.aliyun.com/nexus/content/groups/public/'
+        }
         maven {
             url 'https://global.repo.jmix.io/repository/public'
         }
@@ -64,34 +38,19 @@ subprojects {
     def subArchivesBaseName = props.getProperty('archivesBaseName')
     def archName = subArchivesBaseName.substring(1, subArchivesBaseName.length() - 1)
 
-    task javadocJar(type: Jar) {
-        classifier = 'javadoc'
-        from javadoc
-    }
-
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-
     java {
         withSourcesJar()
     }
 
     artifacts {
-        archives javadocJar, sourcesJar
-    }
-
-    ext {
-        isReleaseVersion = !version.endsWith("SNAPSHOT")
-        //isReleaseVersion = !version.endsWith("RELEASE")
+        archives sourcesJar
     }
 
     publishing {
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = "https://maven.pkg.github.com/pierresj/jmix-huaweifs"
+                url = uri("https://maven.pkg.github.com/" + System.getenv("GITHUB_REPOSITORY"))
                 credentials {
                     username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
                     password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
