@@ -50,7 +50,7 @@ subprojects {
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/" + System.getenv("GITHUB_REPOSITORY"))
+                url = "https://maven.pkg.github.com/pierresj/jmix-huaweifs"
                 credentials {
                     username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
                     password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
