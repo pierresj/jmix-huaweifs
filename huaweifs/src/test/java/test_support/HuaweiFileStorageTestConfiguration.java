@@ -10,6 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @PropertySource("classpath:/test_support/test-app.properties")
+@PropertySource(value = "classpath:/test_support/test-secrets.properties",ignoreResourceNotFound = true)
 @JmixModule(dependsOn = HuaweiFileStorageConfiguration.class)
 public class HuaweiFileStorageTestConfiguration {
     @Bean
