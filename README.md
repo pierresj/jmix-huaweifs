@@ -6,7 +6,7 @@
 
 | Jmix Version | Add-on Version | Implementation |
 |:-|:-|:-|
-| 1.1.* |0.0.3|io.github.pierresj:jmix-huaweifs-starter:0.0.3-RELEASE|
+| 1.1.* |1.0.7|io.github.pierresj:jmix-huaweifs-starter:0.0.3-RELEASE|
 
 ### build.gradle
 ```
