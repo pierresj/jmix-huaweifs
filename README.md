@@ -6,11 +6,11 @@
 
 | Jmix Version | Add-on Version | Implementation |
 |:-|:-|:-|
-| 1.1.* |1.0.7|io.github.pierresj:jmix-huaweifs-starter:1.0.7-RELEASE|
+| 1.1.* |1.0.7|io.github.pierresj:jmix-huaweifs-starter:1.0.7|
 
 ### build.gradle
 ```
-implementation 'io.github.pierresj:jmix-huaweifs-starter:1.0.7-RELEASE'
+implementation 'io.github.pierresj:jmix-huaweifs-starter:1.0.7'
 ```
 ### 配置参数(以properties文件为例)
 ```properties
